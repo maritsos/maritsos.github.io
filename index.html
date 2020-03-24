@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/neighbourhoods_1.js"></script>
+        <script src="data/2015_6.js"></script>
+        <script src="data/2017_7.js"></script>
+        <script src="data/2018_8.js"></script>
+        <script src="data/2019_9.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:14, minZoom:11
+        }).fitBounds([[37.946703525,23.68147374631007],[38.035217475,23.796015253689937]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_backround_0 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 11,
+            maxZoom: 14,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_backround_0;
+        map.addLayer(layer_backround_0);
+        function pop_neighbourhoods_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbourhood'] !== null ? Autolinker.link(feature.properties['neighbourhood'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbourhood_group'] !== null ? Autolinker.link(feature.properties['neighbourhood_group'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_neighbourhoods_1_0() {
+            return {
+                pane: 'pane_neighbourhoods_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_neighbourhoods_1');
+        map.getPane('pane_neighbourhoods_1').style.zIndex = 401;
+        map.getPane('pane_neighbourhoods_1').style['mix-blend-mode'] = 'normal';
+        var layer_neighbourhoods_1 = new L.geoJson(json_neighbourhoods_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_neighbourhoods_1',
+            layerName: 'layer_neighbourhoods_1',
+            pane: 'pane_neighbourhoods_1',
+            onEachFeature: pop_neighbourhoods_1,
+            style: style_neighbourhoods_1_0,
+        });
+        bounds_group.addLayer(layer_neighbourhoods_1);
+        map.addLayer(layer_neighbourhoods_1);
+        var img_kernel_clip_2015_2 = 'data/kernel_clip_2015_2.png';
+        var img_bounds_kernel_clip_2015_2 = [[37.948810999932,23.7021541794353],[38.032365426797,23.7904831449783]];
+        var layer_kernel_clip_2015_2 = new L.imageOverlay(img_kernel_clip_2015_2, img_bounds_kernel_clip_2015_2);
+        bounds_group.addLayer(layer_kernel_clip_2015_2);
+        map.addLayer(layer_kernel_clip_2015_2);
+        var img_kernel_clip_2017_3 = 'data/kernel_clip_2017_3.png';
+        var img_bounds_kernel_clip_2017_3 = [[37.949080288506,23.700090390021472],[38.032342239047495,23.790650200769786]];
+        var layer_kernel_clip_2017_3 = new L.imageOverlay(img_kernel_clip_2017_3, img_bounds_kernel_clip_2017_3);
+        bounds_group.addLayer(layer_kernel_clip_2017_3);
+        map.addLayer(layer_kernel_clip_2017_3);
+        var img_kernel_clip_2018_4 = 'data/kernel_clip_2018_4.png';
+        var img_bounds_kernel_clip_2018_4 = [[37.948810999895,23.693611006487462],[38.031505707484,23.78835838400846]];
+        var layer_kernel_clip_2018_4 = new L.imageOverlay(img_kernel_clip_2018_4, img_bounds_kernel_clip_2018_4);
+        bounds_group.addLayer(layer_kernel_clip_2018_4);
+        map.addLayer(layer_kernel_clip_2018_4);
+        var img_kernel_clip_2019_5 = 'data/kernel_clip_2019_5.png';
+        var img_bounds_kernel_clip_2019_5 = [[37.94955264411028,23.696532644110277],[38.03146900411028,23.788892524110278]];
+        var layer_kernel_clip_2019_5 = new L.imageOverlay(img_kernel_clip_2019_5, img_bounds_kernel_clip_2019_5);
+        bounds_group.addLayer(layer_kernel_clip_2019_5);
+        map.addLayer(layer_kernel_clip_2019_5);
+        function pop_2015_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbourh'] !== null ? Autolinker.link(feature.properties['neighbourh'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbou_1'] !== null ? Autolinker.link(feature.properties['neighbou_1'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NUMPOINTS</th>\
+                        <td>' + (feature.properties['NUMPOINTS'] !== null ? Autolinker.link(feature.properties['NUMPOINTS'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2015_6_0(feature) {
+            if (feature.properties['NUMPOINTS'] >= 0.000000 && feature.properties['NUMPOINTS'] <= 50.000000 ) {
+                return {
+                pane: 'pane_2015_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,235,226,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 50.000000 && feature.properties['NUMPOINTS'] <= 150.000000 ) {
+                return {
+                pane: 'pane_2015_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,191,193,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 150.000000 && feature.properties['NUMPOINTS'] <= 350.000000 ) {
+                return {
+                pane: 'pane_2015_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,134,171,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 350.000000 && feature.properties['NUMPOINTS'] <= 500.000000 ) {
+                return {
+                pane: 'pane_2015_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,73,152,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 500.000000 && feature.properties['NUMPOINTS'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_2015_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,21,134,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 1000.000000 && feature.properties['NUMPOINTS'] <= 20000000.000000 ) {
+                return {
+                pane: 'pane_2015_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(122,1,119,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_2015_6');
+        map.getPane('pane_2015_6').style.zIndex = 406;
+        map.getPane('pane_2015_6').style['mix-blend-mode'] = 'normal';
+        var layer_2015_6 = new L.geoJson(json_2015_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2015_6',
+            layerName: 'layer_2015_6',
+            pane: 'pane_2015_6',
+            onEachFeature: pop_2015_6,
+            style: style_2015_6_0,
+        });
+        bounds_group.addLayer(layer_2015_6);
+        map.addLayer(layer_2015_6);
+        function pop_2017_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbourh'] !== null ? Autolinker.link(feature.properties['neighbourh'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbou_1'] !== null ? Autolinker.link(feature.properties['neighbou_1'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NUMPOINTS</th>\
+                        <td>' + (feature.properties['NUMPOINTS'] !== null ? Autolinker.link(feature.properties['NUMPOINTS'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2017_7_0(feature) {
+            if (feature.properties['NUMPOINTS'] >= 0.000000 && feature.properties['NUMPOINTS'] <= 50.000000 ) {
+                return {
+                pane: 'pane_2017_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,235,226,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 50.000000 && feature.properties['NUMPOINTS'] <= 150.000000 ) {
+                return {
+                pane: 'pane_2017_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,191,193,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 150.000000 && feature.properties['NUMPOINTS'] <= 350.000000 ) {
+                return {
+                pane: 'pane_2017_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,134,171,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 350.000000 && feature.properties['NUMPOINTS'] <= 500.000000 ) {
+                return {
+                pane: 'pane_2017_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,73,152,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 500.000000 && feature.properties['NUMPOINTS'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_2017_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,21,134,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 1000.000000 && feature.properties['NUMPOINTS'] <= 20000.000000 ) {
+                return {
+                pane: 'pane_2017_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(122,1,119,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_2017_7');
+        map.getPane('pane_2017_7').style.zIndex = 407;
+        map.getPane('pane_2017_7').style['mix-blend-mode'] = 'normal';
+        var layer_2017_7 = new L.geoJson(json_2017_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2017_7',
+            layerName: 'layer_2017_7',
+            pane: 'pane_2017_7',
+            onEachFeature: pop_2017_7,
+            style: style_2017_7_0,
+        });
+        bounds_group.addLayer(layer_2017_7);
+        map.addLayer(layer_2017_7);
+        function pop_2018_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbourh'] !== null ? Autolinker.link(feature.properties['neighbourh'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbou_1'] !== null ? Autolinker.link(feature.properties['neighbou_1'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NUMPOINTS</th>\
+                        <td>' + (feature.properties['NUMPOINTS'] !== null ? Autolinker.link(feature.properties['NUMPOINTS'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2018_8_0(feature) {
+            if (feature.properties['NUMPOINTS'] >= 0.000000 && feature.properties['NUMPOINTS'] <= 50.000000 ) {
+                return {
+                pane: 'pane_2018_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,235,226,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 50.000000 && feature.properties['NUMPOINTS'] <= 150.000000 ) {
+                return {
+                pane: 'pane_2018_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,191,193,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 150.000000 && feature.properties['NUMPOINTS'] <= 350.000000 ) {
+                return {
+                pane: 'pane_2018_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,134,171,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 350.000000 && feature.properties['NUMPOINTS'] <= 500.000000 ) {
+                return {
+                pane: 'pane_2018_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,73,152,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 500.000000 && feature.properties['NUMPOINTS'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_2018_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,21,134,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 1000.000000 && feature.properties['NUMPOINTS'] <= 1179.000000 ) {
+                return {
+                pane: 'pane_2018_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(122,1,119,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_2018_8');
+        map.getPane('pane_2018_8').style.zIndex = 408;
+        map.getPane('pane_2018_8').style['mix-blend-mode'] = 'normal';
+        var layer_2018_8 = new L.geoJson(json_2018_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2018_8',
+            layerName: 'layer_2018_8',
+            pane: 'pane_2018_8',
+            onEachFeature: pop_2018_8,
+            style: style_2018_8_0,
+        });
+        bounds_group.addLayer(layer_2018_8);
+        map.addLayer(layer_2018_8);
+        function pop_2019_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbourh'] !== null ? Autolinker.link(feature.properties['neighbourh'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['neighbou_1'] !== null ? Autolinker.link(feature.properties['neighbou_1'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NUMPOINTS</th>\
+                        <td>' + (feature.properties['NUMPOINTS'] !== null ? Autolinker.link(feature.properties['NUMPOINTS'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2019_9_0(feature) {
+            if (feature.properties['NUMPOINTS'] >= 0.000000 && feature.properties['NUMPOINTS'] <= 50.000000 ) {
+                return {
+                pane: 'pane_2019_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,235,226,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 50.000000 && feature.properties['NUMPOINTS'] <= 150.000000 ) {
+                return {
+                pane: 'pane_2019_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,191,193,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 150.000000 && feature.properties['NUMPOINTS'] <= 350.000000 ) {
+                return {
+                pane: 'pane_2019_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,134,171,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 350.000000 && feature.properties['NUMPOINTS'] <= 500.000000 ) {
+                return {
+                pane: 'pane_2019_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,73,152,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 500.000000 && feature.properties['NUMPOINTS'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_2019_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,21,134,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['NUMPOINTS'] >= 1000.000000 && feature.properties['NUMPOINTS'] <= 1676.000000 ) {
+                return {
+                pane: 'pane_2019_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(122,1,119,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_2019_9');
+        map.getPane('pane_2019_9').style.zIndex = 409;
+        map.getPane('pane_2019_9').style['mix-blend-mode'] = 'normal';
+        var layer_2019_9 = new L.geoJson(json_2019_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2019_9',
+            layerName: 'layer_2019_9',
+            pane: 'pane_2019_9',
+            onEachFeature: pop_2019_9,
+            style: style_2019_9_0,
+        });
+        bounds_group.addLayer(layer_2019_9);
+        map.addLayer(layer_2019_9);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'2019<br /><table><tr><td style="text-align: center;"><img src="legend/2019_9_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/2019_9_501501.png" /></td><td>50 - 150</td></tr><tr><td style="text-align: center;"><img src="legend/2019_9_1503502.png" /></td><td>150 - 350</td></tr><tr><td style="text-align: center;"><img src="legend/2019_9_3505003.png" /></td><td>350 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/2019_9_50010004.png" /></td><td>500 - 1000</td></tr><tr><td style="text-align: center;"><img src="legend/2019_9_10005.png" /></td><td>>1000</td></tr></table>': layer_2019_9,'2018<br /><table><tr><td style="text-align: center;"><img src="legend/2018_8_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/2018_8_501501.png" /></td><td>50 - 150</td></tr><tr><td style="text-align: center;"><img src="legend/2018_8_1503502.png" /></td><td>150 - 350</td></tr><tr><td style="text-align: center;"><img src="legend/2018_8_3505003.png" /></td><td>350 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/2018_8_50010004.png" /></td><td>500 - 1000</td></tr><tr><td style="text-align: center;"><img src="legend/2018_8_10005.png" /></td><td>>1000</td></tr></table>': layer_2018_8,'2017<br /><table><tr><td style="text-align: center;"><img src="legend/2017_7_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/2017_7_501501.png" /></td><td>50 - 150</td></tr><tr><td style="text-align: center;"><img src="legend/2017_7_1503502.png" /></td><td>150 - 350</td></tr><tr><td style="text-align: center;"><img src="legend/2017_7_3505003.png" /></td><td>350 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/2017_7_50010004.png" /></td><td>500 - 1000</td></tr><tr><td style="text-align: center;"><img src="legend/2017_7_10005.png" /></td><td>>1000</td></tr></table>': layer_2017_7,'2015<br /><table><tr><td style="text-align: center;"><img src="legend/2015_6_0500.png" /></td><td>0 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/2015_6_501501.png" /></td><td>50 - 150</td></tr><tr><td style="text-align: center;"><img src="legend/2015_6_1503502.png" /></td><td>150 - 350</td></tr><tr><td style="text-align: center;"><img src="legend/2015_6_3505003.png" /></td><td>350 - 500</td></tr><tr><td style="text-align: center;"><img src="legend/2015_6_50010004.png" /></td><td>500 - 1000</td></tr><tr><td style="text-align: center;"><img src="legend/2015_6_10005.png" /></td><td>>1000</td></tr></table>': layer_2015_6,"kernel_clip_2019": layer_kernel_clip_2019_5,"kernel_clip_2018": layer_kernel_clip_2018_4,"kernel_clip_2017": layer_kernel_clip_2017_3,"kernel_clip_2015": layer_kernel_clip_2015_2,'<img src="legend/neighbourhoods_1.png" /> neighbourhoods': layer_neighbourhoods_1,"backround": layer_backround_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_neighbourhoods_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['neighbourhood'] !== null?String('<div style="color: #000000; font-size: 7pt; font-family: \'Times New Roman\', sans-serif;">' + layer.feature.properties['neighbourhood']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_neighbourhoods_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        map.addControl(new L.Control.Search({
+            layer: layer_neighbourhoods_1,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'neighbourhood'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"NUMPOINTS": "real"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + key).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + key).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + key).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_NUMPOINTS = document.createElement("div");
+            div_NUMPOINTS.id = "div_NUMPOINTS";
+            div_NUMPOINTS.className = "slider";
+            document.getElementById("menu").appendChild(div_NUMPOINTS);
+            var lab_NUMPOINTS = document.createElement('div');
+            lab_NUMPOINTS.innerHTML  = 'NUMPOINTS: <span id="val_NUMPOINTS"></span>';
+            lab_NUMPOINTS.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_NUMPOINTS);
+            var reset_NUMPOINTS = document.createElement('div');
+            reset_NUMPOINTS.innerHTML = 'clear filter';
+            reset_NUMPOINTS.className = 'filterlabel';
+            lab_NUMPOINTS.className = 'filterlabel';
+            reset_NUMPOINTS.onclick = function() {
+                sel_NUMPOINTS.noUiSlider.reset();
+            };
+            document.getElementById("menu").appendChild(reset_NUMPOINTS);
+            var sel_NUMPOINTS = document.getElementById('div_NUMPOINTS');
+            noUiSlider.create(sel_NUMPOINTS, {
+                connect: true,
+                start: [2.0, 1676.0],
+                range: {
+                min: 2.0,
+                max: 1676.0
+                }
+            });
+            sel_NUMPOINTS.noUiSlider.on('update', function (values) {
+            val_NUMPOINTS = document.getElementById('val_NUMPOINTS');
+            val_NUMPOINTS.innerHTML = values.join(' - ');
+                filterFunc()
+            });
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        resetLabels([layer_neighbourhoods_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_neighbourhoods_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_neighbourhoods_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_neighbourhoods_1]);
+        });
+        </script>
+    </body>
+</html>
